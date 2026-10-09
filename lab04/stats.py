@@ -35,6 +35,26 @@ def read_valid(lines):
     return res          
 
 
+def average_by_city(lines):
+    res = {}
+
+    for line in lines:
+        c = line["city"]
+        t = line["temp"]
+        
+        res[c] = res.get(c, 0) + temp
+        city_counter[c] = city_counter.get(c, 0) + 1
+
+    avg_res = {}
+
+    for c in res:
+        avg_res[c] = round(res[c] / city_counter[c], 1)
+
+    return avg_res
+
+
+    return res    
+
 
     
     
