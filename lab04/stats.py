@@ -19,8 +19,23 @@ def parse_record (line):
     if date == "":
         raise ValueError("Дата пустая")
     
-    return {"city":city, "temp": temp, "date": date} # возвращаем разобр
-        
+    return {"city":city, "temp": temp, "date": date} 
+
+
+def read_valid(lines):
+    res = []
+
+    for line in lines:
+        if line.strip() != "": 
+            try:
+                l = parse_record(line)
+                res.append(l)
+            except ValueError: 
+                continue 
+    return res          
+
+
+
     
     
 
