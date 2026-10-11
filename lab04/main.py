@@ -2,8 +2,8 @@
 from stats import average_by_city, read_valid, warmest_city, max_temp
 import sys
 
-#lines = sys.stdin.read().splitlines()
-lines = []
+lines = sys.stdin.read().splitlines()
+# lines = []
 err_lines = 0
 
 while True:
@@ -11,7 +11,6 @@ while True:
         line = input()
 
         if line == "":
-            err_lines = err_lines + 1
             break
 
         lines.append(line)
