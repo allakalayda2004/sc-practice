@@ -1,5 +1,5 @@
 
-from stats import average_by_city, read_valid, warmest_city
+from stats import average_by_city, read_valid, warmest_city, max_temp
 import sys
 
 #lines = sys.stdin.read().splitlines()
@@ -26,9 +26,7 @@ print(valid_count)
 
 print(err_lines)
 
-city = warmest_city(records)
-print(city)
-
+print(max_temp(records))
 
 # averages = average_by_city(records)
 # print(averages)

@@ -81,8 +81,32 @@ def warmest_city(lines):
         max_temp = avg
         max_avg_city = city
 
-    return max_temp 
+    return max_avg_city 
 
+
+def max_temp(lines):
+    dict = {}
+    city_counter = {}
+
+    for record in lines:
+        city = record["city"]
+        temp = record["temperature"]
+		
+        dict[city] = dict.get(city, 0) + temp
+        city_counter[city] = city_counter.get(city,0) + 1
+		
+    sorted_cities = sorted(dict) 
+
+    max_temp = -99
+    avg = 0
+
+    for city in sorted_cities:
+        avg = dict[city] / city_counter[city]
+
+    if avg > max_temp:
+        max_temp = avg
+
+    return max_temp 
     
 
 #parse_record("azov;15;12.12.2026") 
