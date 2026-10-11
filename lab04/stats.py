@@ -55,6 +55,38 @@ def average_by_city(lines):
 
     return res    
 
+def warmest_city(lines):
+    dict = {}
+    city_counter = {}
+
+    for record in records:
+        city = record["city"]
+        temp = record["temp"]
+		
+        dict[city] = dict.get(city, 0) + temp
+        city_counter[city] = city_counter.get(city,0)
+		
+    sorted_cities = sorted(dict) 
+
+    max_avg_city = ""
+    max_temp = -99
+
+    for city in sorted_cities:
+        avg = dict[city] / city_counter[city]
+
+    if avg > max_temp:
+        max_temp = avg
+        max_avg_city = city
+
+    return max_avg_city # возвращаем название города
+	
+
+
+
+   
+
+
+    return res 
 
     
     
