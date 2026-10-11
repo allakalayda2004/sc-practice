@@ -19,7 +19,7 @@ def parse_record (line):
     if date == "":
         raise ValueError("Дата пустая")
     
-    return {"city":city, "temp": temp, "date": date} 
+    return {"city":city, "temperature": temp, "date": date} 
 
 
 def read_valid(lines):
