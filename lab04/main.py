@@ -7,13 +7,15 @@ print('Hello')
 lines = []
 
 while True:
-    line = input()
+    try:
+        line = input()
 
-    if line == "":
+        if line == "":
+            break
+
+        lines.append(line)
+    except EOFError:
         break
-
-    lines.append(line)
-
 
 records = read_valid(lines)
 

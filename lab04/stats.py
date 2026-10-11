@@ -12,7 +12,8 @@ def parse_record (line):
     try:
         t = float(temp)
     except ValueError: 
-        raise ValueError("Ошибка с температурой") 
+        raise ValueError("Ошибка с температурой")
+    
     if city == "":
         raise ValueError("Город пустой")
 
