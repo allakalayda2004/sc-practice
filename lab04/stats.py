@@ -78,18 +78,9 @@ def warmest_city(lines):
         max_temp = avg
         max_avg_city = city
 
-    return max_avg_city # возвращаем название города
-	
-
-
-
-   
-
-
-    return res 
+    return max_avg_city 
 
     
-    
 
-parse_record("azov;15;12.12.2026")
-parse_record("azov;15") 
+#parse_record("azov;15;12.12.2026") 
+#parse_record("azov;15") 

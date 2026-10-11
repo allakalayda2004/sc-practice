@@ -3,7 +3,18 @@ from stats import average_by_city, read_valid, warmest_city
 import sys
 print('Hello')
 
-lines = sys.stdin.read().splitlines()
+#lines = sys.stdin.read().splitlines()
+lines = []
+
+while True:
+    line = input()
+
+    if line == "":
+        break
+
+    lines.append(line)
+
+
 total = {}
 count = {}
 for line in lines:
