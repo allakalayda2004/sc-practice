@@ -19,7 +19,7 @@ def parse_record (line):
     if date == "":
         raise ValueError("Дата пустая")
     
-    return {"city":city, "temperature": temp, "date": date} 
+    return {"city":city, "temperature": t, "date": date} 
 
 
 def read_valid(lines):
@@ -37,12 +37,13 @@ def read_valid(lines):
 
 def average_by_city(lines):
     res = {}
+    city_counter = {}
 
     for line in lines:
         c = line["city"]
-        t = line["temp"]
+        t = line["temperature"]
         
-        res[c] = res.get(c, 0) + temp
+        res[c] = res.get(c, 0) + t
         city_counter[c] = city_counter.get(c, 0) + 1
 
     avg_res = {}
@@ -59,17 +60,18 @@ def warmest_city(lines):
     dict = {}
     city_counter = {}
 
-    for record in records:
+    for record in lines:
         city = record["city"]
-        temp = record["temp"]
+        temp = record["temperature"]
 		
         dict[city] = dict.get(city, 0) + temp
-        city_counter[city] = city_counter.get(city,0)
+        city_counter[city] = city_counter.get(city,0) + 1
 		
     sorted_cities = sorted(dict) 
 
     max_avg_city = ""
     max_temp = -99
+    avg = 0
 
     for city in sorted_cities:
         avg = dict[city] / city_counter[city]

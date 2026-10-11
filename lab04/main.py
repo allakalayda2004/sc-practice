@@ -21,8 +21,8 @@ valid_count = len(records)
 print(valid_count)
 
 city = warmest_city(records)
-print(warmest_city)
+print(city)
 
 
 averages = average_by_city(records)
-print(average_by_city)
+print(averages)
