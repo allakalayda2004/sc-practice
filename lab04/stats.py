@@ -81,7 +81,7 @@ def warmest_city(lines):
         max_temp = avg
         max_avg_city = city
 
-    return max_avg_city 
+    return max_temp 
 
     
 
