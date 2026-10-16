@@ -4,7 +4,6 @@ import sys
 
 lines = sys.stdin.read().splitlines()
 # lines = []
-err_lines = 0
 
 while True:
     try:
@@ -15,7 +14,6 @@ while True:
 
         lines.append(line)
     except EOFError:
-        err_lines = err_lines + 1
         break
 
 records = read_valid(lines)
@@ -23,7 +21,7 @@ records = read_valid(lines)
 valid_count = len(records)
 print(valid_count)
 
-print(err_lines)
+print(len(lines) - valid_count)
 
 print(max_temp(records))
 
