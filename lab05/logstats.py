@@ -24,4 +24,21 @@ def count_levels(lines) -> dict:
     return dict(counts)
 
 
+def top_errors(lines, n: int) -> list:
+    errors = []
+    for line in lines:
+        try:
+            event = parse_event(line)
+            if event["level"] == "ERROR":
+                errors.append(event["message"])
+        except ValueError:
+            continue
+
+    counted = Counter(errors)
+
+    sorted_errors = sorted(counted.items(), key=lambda x: (-x[1], x[0]))
+    return sorted_errors[:n]
+
+
+
 
