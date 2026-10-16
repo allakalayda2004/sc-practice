@@ -55,7 +55,6 @@ def average_by_city(lines):
     return avg_res
 
 
-    return res    
 
 def warmest_city(lines):
     dict = {}
