@@ -4,7 +4,7 @@ def count_by_extension(paths: list[str]) -> dict[str, int]:
     result = {}
     for path in paths:
         filename = os.path.basename(path)
-        if '.' in filename:
+        if filename.find('.', 1) > 0:
             ext = filename.split('.')[-1].lower()
         else:
             ext = ""
@@ -30,7 +30,7 @@ def human_size(n_bytes: int) -> str:
     if n_bytes == 0:
         return "0 B"
 
-    units = ['B', 'KB', 'MB', 'GB', 'TB']
+    units = ['Б', 'КБ', 'МБ', 'ГБ', 'ТБ']
     i = 0
     size = float(n_bytes)
 
