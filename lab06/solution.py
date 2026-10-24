@@ -11,4 +11,18 @@ def count_by_extension(paths: list[str]) -> dict[str, int]:
         result[ext] = result.get(ext, 0) + 1
     return result
 
+def deepest_path(paths: list[str]) -> str:
+    if not paths:
+        return ""
+
+    deepest = ""
+    max_depth = -1
+
+    for path in sorted(paths):
+        depth = path.count("/")
+        if depth > max_depth:
+            deepest = path
+            max_depth = depth
+
+    return deepest
 
