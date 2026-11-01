@@ -26,8 +26,8 @@ def convert_value(val: str):
     elif val.isdigit():
         return int(val)
     else:
-        if "," in val:
-            val = val.replace(",", ".")
+        # if "," in val:
+        #     val = val.replace(",", ".")
         return float(val)
 
 def parse_settings(lines: list[str]) -> dict:
