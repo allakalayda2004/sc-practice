@@ -25,9 +25,9 @@ def convert_value(val: str):
         return False
     
     if "." in val:
-        return float(val)
+        return float(val.replace(' ', ''))
     else:
-        return int(val)
+        return int(val.replace(' ', ''))
 
 def parse_settings(lines: list[str]) -> dict:
     result = {}
