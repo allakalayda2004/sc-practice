@@ -19,9 +19,9 @@ def csv_to_records(text: str) -> list[dict]:
     return records
 
 def convert_value(val: str):
-    if val.lower() == 'true':
+    if val.lower() == 'true' or  val.lower() == 'yes':
         return True
-    elif val.lower() == 'false':
+    elif val.lower() == 'false' or  val.lower() == 'no':
         return False
     elif val.isdigit():
         return int(val)
