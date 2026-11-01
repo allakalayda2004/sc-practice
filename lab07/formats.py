@@ -20,14 +20,15 @@ def csv_to_records(text: str) -> list[dict]:
 
 def convert_value(val: str):
     if val.lower() == 'true':
-        val = True
+        return True
     elif val.lower() == 'false':
-        val = False
+        return False
     elif val.isdigit():
-        val = int(val)
+        return int(val)
     else:
-        val = float(val)
-    return val
+        if "," in val and "." in val:
+            val = val.replace(",", ".")
+        return float(val)
 
 def parse_settings(lines: list[str]) -> dict:
     result = {}
