@@ -19,13 +19,14 @@ def csv_to_records(text: str) -> list[dict]:
     return records
 
 def convert_value(val: str):
-    if val.lower() == 'true' or  val.lower() == 'yes':
+    lowvar = val.lower()
+
+    if lowvar == 'true' or  lowvar == 'yes':
         return True
-    elif val.lower() == 'false' or  val.lower() == 'no':
+    elif lowvar == 'false' or lowvar == 'no':
         return False
-    elif "." in val or "," in val:
-        if "," in val:
-            val = val.replace(",", ".")
+    
+    if "." in val:
         return float(val)
     else:
         return int(val)
@@ -40,10 +41,10 @@ def parse_settings(lines: list[str]) -> dict:
         if not line:
             continue
 
-        if line.endswith(':'): # это значит в конфиге записано "имя:" и все
+        if line.endswith(':'): 
             current_key = line[:-1]
             result[current_key] = []
-        elif line.startswith('- '):
+        elif current_key != None and line.startswith('- '):
             # Преобразование типов
             val = line[2:].strip()
             try:
@@ -56,6 +57,7 @@ def parse_settings(lines: list[str]) -> dict:
             except ValueError:
                 result[current_key].append(val)
         else:
+            current_key = None
             key, val = [x.strip() for x in line.split(':', 1)]
             try:
                 parsed_val = convert_value(val)
