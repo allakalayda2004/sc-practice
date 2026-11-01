@@ -19,7 +19,7 @@ def csv_to_records(text: str) -> list[dict]:
     return records
 
 def convert_value(val: str):
-    lowvar = val
+    lowvar = val.strip()
 
     if lowvar == 'true' or  lowvar == 'yes':
         return True
