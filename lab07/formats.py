@@ -74,7 +74,6 @@ def merge_by_key(rows: list[dict], extra: dict, key: str ='id') -> list[dict]:
                 for extra_key in extra_data:
                     if not extra_key in row:
                         row[extra_key] = extra_data[extra_key]
-                row.update(extra[row_id])
     return rows
 
 def records_to_json(records: list[dict]) -> str:
