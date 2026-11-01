@@ -44,23 +44,24 @@ def parse_settings(lines: list[str]) -> dict:
             result[current_key] = []
         elif line.startswith('- '):
             # Преобразование типов
+            val = line[2:].strip()
             try:
-                val = convert_value(line[2:].strip())
+                parsed_val = convert_value(val)
 
                 if current_key:
-                    result[current_key].append(val)
+                    result[current_key].append(parsed_val)
                 else:
                     return {}
             except ValueError:
-                pass
+                result[current_key].append(val)
         else:
             key, val = [x.strip() for x in line.split(':', 1)]
             try:
-                val = convert_value(line[2:].strip())
+                parsed_val = convert_value(val)
 
-                result[key] = val
+                result[key] = parsed_val
             except ValueError:
-                pass
+                result[key] = val
     return result
 
 def merge_by_key(rows: list[dict], extra: dict, key: str ='id') -> list[dict]:
