@@ -2,12 +2,21 @@ import csv
 import json
 import io
 
-def csv_to_records(text:str) -> list[dict]:
+def csv_to_records(text: str) -> list[dict]:
     if not text.strip():
         return []
+
     f = io.StringIO(text.strip())
     reader = csv.DictReader(f)
-    return [row for row in reader]
+
+    records = []
+    for row in reader:
+        clean_row = {}
+        for key in row:
+            clean_row[key.strip()] = row[key].strip()
+        records.append(clean_row)
+
+    return records
 
 def convert_value(val: str):
     if val.lower() == 'true':
