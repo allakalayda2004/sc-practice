@@ -26,7 +26,7 @@ def convert_value(val: str):
     elif val.isdigit():
         return int(val)
     else:
-        if "," in val and "." in val:
+        if "," in val:
             val = val.replace(",", ".")
         return float(val)
 
