@@ -23,12 +23,12 @@ def convert_value(val: str):
         return True
     elif val.lower() == 'false' or  val.lower() == 'no':
         return False
-    elif val.isdigit():
-        return int(val)
+    elif "." in val:
+        return float(val)
     else:
+        return int(val)
         # if "," in val:
         #     val = val.replace(",", ".")
-        return float(val)
 
 def parse_settings(lines: list[str]) -> dict:
     result = {}
@@ -68,7 +68,7 @@ def parse_settings(lines: list[str]) -> dict:
 def merge_by_key(rows: list[dict], extra: dict, key: str ='id') -> list[dict]:
     for row in rows:
         if key in row:
-            row_id = row.get(key)
+            row_id = str(row.get(key))
             if row_id in extra:
                 row.update(extra[row_id])
     return rows
