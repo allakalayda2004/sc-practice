@@ -44,16 +44,13 @@ def parse_settings(lines: list[str]) -> dict:
         if line.endswith(':'): 
             current_key = line[:-1]
             result[current_key] = []
-        elif current_key != None and line.startswith('- '):
+        elif current_key and line.startswith('- '):
             # Преобразование типов
             val = line[2:].strip()
             try:
                 parsed_val = convert_value(val)
 
-                if current_key:
-                    result[current_key].append(parsed_val)
-                else:
-                    return {}
+                result[current_key].append(parsed_val)
             except ValueError:
                 result[current_key].append(val)
         else:
