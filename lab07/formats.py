@@ -19,11 +19,9 @@ def csv_to_records(text: str) -> list[dict]:
     return records
 
 def convert_value(val: str):
-    lowvar = val.strip()
-
-    if lowvar == 'true' or  lowvar == 'yes':
+    if val == 'true' or  val == 'yes':
         return True
-    elif lowvar == 'false' or lowvar == 'no':
+    elif val == 'false' or val == 'no':
         return False
     
     if "." in val:
@@ -47,12 +45,7 @@ def parse_settings(lines: list[str]) -> dict:
         elif current_key and line.startswith('- '):
             # Преобразование типов
             val = line[2:].strip()
-            try:
-                parsed_val = convert_value(val)
-
-                result[current_key].append(parsed_val)
-            except ValueError:
-                result[current_key].append(val)
+            result[current_key].append(val)
         else:
             current_key = None
             key, val = [x.strip() for x in line.split(':', 1)]
