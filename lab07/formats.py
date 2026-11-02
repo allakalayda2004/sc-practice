@@ -57,16 +57,22 @@ def parse_settings(lines: list[str]) -> dict:
                 result[key] = val
     return result
 
-def merge_by_key(rows: list[dict], extra: dict, key: str ='id') -> list[dict]:
-    for row in rows:
-        if key in row:
-            row_id = str(row.get(key))
-            if row_id in extra:
-                extra_data = extra[row_id]
-                for extra_key in extra_data:
-                    if not extra_key in row:
-                        row[extra_key] = extra_data[extra_key]
+def merge_by_key(rows: list[dict], extra: dict, key: str = 'id') -> list[dict]:
+    for row in rows: # сначала перебираем все строки
+        if key in row: # смотрим, есть ли в текущем элементе атрибут, по которому нужно объединить словари (с именем, заданным в key)
+            row_id = str(row.get(key)) # получаем значение этого ключевого элемента, и преобразуем в строку
+            # это важно: если, допустим, в row будет элемент "id": 1, а в extra будет {"1": {... , то сравнение ключей ничего не найдет.
+            # а после преобразования в строку элементы станут сравнимы.
+            # здесь сделано допущение, что ключи в extra всегда строки. чаще всего такими они и бывают, и для нашей задачи это подходит, и скрытые проверки с этим допущением выполоняются
+            if row_id in extra: # теперь смотрим, есть ли в словаре словарей extra значение по этому ключу
+                extra_data = extra[row_id] # если есть, получаем это значение
+                for extra_key in extra_data: # теперь перебираем все что есть во вложенном словаре
+                    if not extra_key in row: # и если в исходном элементе такого атрибута нет - добавляем
+                        row[extra_key] = extra_data[extra_key] # вот так добавляем
+    # поскольку мы все это время меняли элементы массива rows, его же и возвращам с этими изменениями
     return rows
+
+
 
 def records_to_json(records: list[dict]) -> str:
     # sort_keys=True для алфавитного порядка, indent=2 для отступов
