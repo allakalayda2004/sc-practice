@@ -1,45 +1,44 @@
-import os
+import os #управлять файлами и папками
 
-def count_by_extension(paths: list[str]) -> dict[str, int]:
-    result = {}
-    for path in paths:
-        filename = os.path.basename(path)
-        if filename.find('.', 1) > 0:
-            ext = filename.split('.')[-1].lower()
+def count_by_extension(paths: list[str]) -> dict[str, int]: #группируют файлы по их расширению
+    result = {} #пустой словарь, служащий для сборки результатов
+    for path in paths: #прогнать элемент(path), чтобы выполнять с ним одинаковые действия 
+        filename = os.path.basename(path) #проверяем имя файла из всей большой строки(кэто когда в папки, и смотришь имя файлла вверху, если бы вручную)
+        if filename.find('.', 1) > 0: #если нашли расширение, в имя файла расширение файла(поэтому пишем . в скобкач и черех запятую ее первую позицию)
+            ext = filename.split('.')[-1].lower() #если не нашли разделяем splitom строку по всем точкам, и [-1] берем последний элемент и переводим в нижний регистр
         else:
-            ext = ""
-        result[ext] = result.get(ext, 0) + 1
-    return result
+            ext = "" #делаем пустую строку
+        result[ext] = result.get(ext, 0) + 1 #result.get(для получения элемента словаря по ключу словаря) находит элемент со значением по умолчанию 0 и прибавляем единицу
+    return result #возвращает результат 
 
-def deepest_path(paths: list[str]) -> str:
-    if not paths:
-        return ""
+def deepest_path(paths: list[str]) -> str: #ищем самый длинный путь
+    if not paths: #если нет элемета, сразу возвращаем пустую строку
+        return "" #сразу возвращает пустоту
 
-    deepest = ""
-    max_depth = -1
+    deepest = "" #глубочай путь сначала принимает пустоту
+    max_depth = -1 #максимальная глубина которую, которая должна принять -1 (потому что 0 если файл в корне диска)
 
-    for path in sorted(paths):
-        depth = path.count("/")
-        if depth > max_depth:
-            deepest = path
-            max_depth = depth
+    for path in sorted(paths): #сортируем найди пути
+        depth = path.count("/") #считаем сколько в путях слэшей  
+        if depth > cur_depth: #сравниваем текущую глубину и максимальную, главная часть алгоритма поика максимального 
+            deepest = path #cамая глубокая глубина  принимает путь
+            cur_depth = depth #текущий принимает глубокий
 
-    return deepest
+    return deepest #возвращает самый длинный путь
 
-def human_size(n_bytes: int) -> str:
-    if n_bytes == 0:
-        return "0 Б" 
+def human_size(n_bytes: int) -> str: #размер в удобных единицах
+    if n_bytes == 0: #размер файла
+        return "0 Б"  #понятный для человека
 
-    units = ['Б', 'КБ', 'МБ', 'ГБ', 'ТБ']
-    i = 0
-    size = float(n_bytes)
+    units = ['Б', 'КБ', 'МБ', 'ГБ', 'ТБ'] #units(единицы) список(list) с понятными для человека названиями единиц измерения от самого маленького к самому большому
+    i = 0 #список указатель который смотрит на самый первый элемент в списке units
+    size = float(n_bytes) #берет размер файла n_bytes и принудительно превращает его в число с плавающей точкой
 
-    while size >= 1024 and i < len(units) - 1:
-        size /= 1024
-        i += 1
+    while size >= 1024 and i < len(units) - 1: #len(units)-1 вычисляет самый последний индекс в списке units
+        size /= 1024 #делим на 1024 размер файла превращенный принудительно в число с плавающей точкой
+        i += 1 #увеличивает номер индекса в списке units на 1
 
     if n_bytes <= 1024:
-    #size == int(size):
-        return f"{int(size)} {units[i]}"
+        return f"{int(size)} {units[i]}" #собирает красивую строчку без дробей
     else:
-        return f"{size:.1f} {units[i]}"
+        return f"{size:.1f} {units[i]}" #собирает красивую строчку с одним знаком после запятой
